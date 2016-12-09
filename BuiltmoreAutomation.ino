@@ -105,6 +105,7 @@ void loop(){
     case BA_STATE_REVERSE:
         if (stamperStepper.distanceToGo() == 0){
             seederStepper.setSpeed(0);
+            stamperStepper.moveTo(0);
             state = BA_STATE_IDLE;
         }
         else {
