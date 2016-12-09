@@ -28,6 +28,7 @@
 #define DESIRED_SPEED       (4095/2)
 #define SWITCH_DISTANCE_M 	(.05)
 #define DISC_RADIUS_M       (.09144)
+#define PULLEY_RATIO        (4)
 
 #define FORWARD_STEPS       (2000)
 #define REVERSE_STEPS       (500)

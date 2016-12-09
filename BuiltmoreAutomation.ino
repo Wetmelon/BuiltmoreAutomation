@@ -79,7 +79,7 @@ void loop(){
     switch (state){
     case BA_STATE_STAMPER_ONLY:
         if (millis() - seederTimer > SEEDER_DELAY){
-            seederStepper.setSpeed(traySpeed / DISC_RADIUS_M * 100 / (PI)*  MICROSTEPPING);
+            seederStepper.setSpeed(traySpeed / DISC_RADIUS_M * 100 / (PI) *  MICROSTEPPING * PULLEY_RATIO);
             state = BA_STATE_BOTH;
         }
             stamperStepper.run();
@@ -125,9 +125,9 @@ void startRunning(){
 
         delay(STAMPER_DELAY);
 
-        stamperStepper.setMaxSpeed(traySpeed / DISC_RADIUS_M * 100 / (PI)*  MICROSTEPPING);
-        stamperStepper.setAcceleration(STEPPER_ACCEL * MICROSTEPPING);
-        stamperStepper.move(FORWARD_STEPS * MICROSTEPPING);
+        stamperStepper.setMaxSpeed(traySpeed / DISC_RADIUS_M * 100 / (PI)*  MICROSTEPPING * PULLEY_RATIO);
+        stamperStepper.setAcceleration(STEPPER_ACCEL * MICROSTEPPING * PULLEY_RATIO);
+        stamperStepper.move(FORWARD_STEPS * MICROSTEPPING * PULLEY_RATIO);
 
         state = BA_STATE_STAMPER_ONLY;
 
