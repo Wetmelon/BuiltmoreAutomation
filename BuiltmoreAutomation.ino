@@ -19,11 +19,11 @@ AccelStepper stamperStepper(AccelStepper::DRIVER, STEP1_PIN, DIR1_PIN);
 AccelStepper seederStepper(AccelStepper::DRIVER, STEP2_PIN, DIR2_PIN);
 
 DAC_MCP49xx myDac(DAC_MCP49xx::MCP4921, CS_PIN);
-ba_state_t state;
+ba_state_t state = BA_STATE_INIT;
 
 uint32_t seederTimer = 0;
-uint32_t speedTimer = 0;
-float traySpeed = 0;
+volatile uint32_t speedTimer = 0;
+volatile float traySpeed = 0;
 
 uint32_t move = 0;
 uint32_t accel = 1;
@@ -68,6 +68,12 @@ void setup(){
 
     analogReadResolution(12);
     analogReadAveraging(4);
+
+    stamperStepper.setSpeed(0);
+    seederStepper.setSpeed(0);
+
+    stamperStepper.setCurrentPosition(0);
+    seederStepper.setCurrentPosition(0);
 
     myDac.output(DESIRED_SPEED);
 
